@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "2.6"
+metadata:
+  name: zmmatreq
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: https://bedusapp01.dev.bearingpoint.com:44304/
+          client: "900"
+        app:
+          name: ZMMATREQ
+          description: Material request
+          package: ZMM_MATERIAL_REQUEST_FIORI
+          transport: S12K904609
+        exclude:
+          - /test/

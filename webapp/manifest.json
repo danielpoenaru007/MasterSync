@@ -1,0 +1,133 @@
+{
+  "_version": "1.37.0",
+  "sap.app": {
+    "id": "zmmatreq",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.9.6",
+      "toolsId": "c3ebe1b1-c0ee-4621-a2a2-e69be8444101"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZMM_MAT_MASTER_REQUEST_SRV/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "rootView": {
+      "viewName": "zmmatreq.view.App",
+      "type": "XML",
+      "async": true
+    },
+    "dependencies": {
+      "minUI5Version": "1.96.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "zmmatreq.i18n.i18n"
+        }
+      },
+      "": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+        },
+        "dataSource": "mainService",
+        "preload": true
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "zmmatreq.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "requestList",
+          "target": "requestList"
+        },
+        {
+          "pattern": "RequestDetail/{Reqnr}/{Type}",
+          "name": "requestDetail",
+          "target": "requestDetail"
+        }
+      ],
+      "targets": {
+        "requestList": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewName": "RequestList",
+          "viewLevel": 1
+        },
+        "requestDetail": {
+          "viewType": "XML",
+          "viewName": "RequestDetail",
+          "viewLevel": 2
+        }
+      }
+    }
+  }
+}

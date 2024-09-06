@@ -1,0 +1,185 @@
+<mvc:View controllerName="zmmatreq.controller.RequestList" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable">
+	<Page showHeader="false" showFooter="false">
+		<content>
+			<smartFilterBar:SmartFilterBar id="idSmartFilterBar" persistencyKey="SmartFilterPKey" entitySet="GetRequestListSet"
+				enableBasicSearch="false" beforeVariantFetch="onBeforeVariantFetch" afterVariantLoad="onAfterVariantLoad" considerSelectionVariants="true">
+				<!--<smartFilterBar:SmartFilterBar id="idSmartFilterBar" showClearButton="true" entitySet="GetRequestListSet" showFilterConfiguration="true" liveMode="false" useToolbar="false">-->
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration label="{i18n>RequestNumber}" key="Reqnr" visibleInAdvancedArea="true">
+						<smartFilterBar:customControl>
+							<Input id="inpReqnr" valueHelpOnly="false" showValueHelp="false"/>
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration label="{i18n>RequestType}" key="Reqtyp" visibleInAdvancedArea="true">
+						<smartFilterBar:customControl>
+							<ComboBox id="cbReqtyp" items="{/GetReqtypSet}">
+								<core:ListItem key="{Reqtyp}" text="{ReqtypTxt}"></core:ListItem>
+							</ComboBox>
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration label="{i18n>RequestStatus}" key="Reqstat" visibleInAdvancedArea="true">
+						<smartFilterBar:customControl>
+							<MultiComboBox id="mcbReqstat" items="{/GetReqstatSet}">
+								<core:ListItem key="{Reqstat}" text="{ReqstatTxt}"></core:ListItem>
+							</MultiComboBox>
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration label="{i18n>MaterialType}" key="Mtart" visibleInAdvancedArea="true">
+						<smartFilterBar:customControl>
+							<MultiComboBox id="mcbMtart" items="{/GetMaterialTypeSet}">
+								<core:ListItem key="{Mtart}" text="{Mtart} - {Mtbez}"></core:ListItem>
+							</MultiComboBox>
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration label="{i18n>MaterialNumber}" key="Matnr" visibleInAdvancedArea="true">
+						<smartFilterBar:customControl>
+							<Input id="inpMatnr" valueHelpOnly="false" showValueHelp="false"/>
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration label="{i18n>Plant}" key="Werks" visibleInAdvancedArea="true">
+						<smartFilterBar:customControl>
+							<MultiComboBox id="mcbWerks" items="{/GetPlantSet}">
+								<core:ListItem key="{Werks}" text="{Werks} - {Name1}"></core:ListItem>
+							</MultiComboBox>
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration>
+					<!-- <smartFilterBar:ControlConfiguration label="{i18n>GMPorNonGMP}" key="Gmpmat" visibleInAdvancedArea="true">
+						<smartFilterBar:customControl>
+							<ComboBox id="cbGmpmat" filterSecondaryValues="true">
+								<core:Item key="G" text="{i18n>GMP}"/>
+								<core:Item key="N" text="{i18n>NonGMP}"/>
+							</ComboBox>
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration> -->
+					<!-- <smartFilterBar:ControlConfiguration label="{i18n>ChangeNumberCreated}" key="Aennr" visibleInAdvancedArea="true">
+						<smartFilterBar:customControl>
+							<CheckBox id="chkAennr"/>
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration> -->
+					<smartFilterBar:ControlConfiguration label="{i18n>CreatedBy}" key="Crtuser" visibleInAdvancedArea="true">
+						<smartFilterBar:customControl>
+							<Input id="inpCrtuser" valueHelpOnly="false" showValueHelp="false"/>
+						</smartFilterBar:customControl>
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration label="{i18n>CreatedDate}" key="Crtdate" conditionType="sap.ui.comp.config.condition.DateRangeType"
+						visibleInAdvancedArea="true">
+						
+					</smartFilterBar:ControlConfiguration>
+				</smartFilterBar:controlConfiguration>
+			</smartFilterBar:SmartFilterBar>
+			<smartTable:SmartTable smartFilterId="idSmartFilterBar" tableType="ResponsiveTable" showVariantManagement="false"
+				beforeRebindTable="onBeforeRebindTable" entitySet="GetRequestListSet" useVariantManagement="true" useTablePersonalisation="true"
+				showRowCount="true" useExportToExcel="true" enableAutoBinding="false" showFullScreenButton="true" header="{i18n>title}">
+				<smartTable:customToolbar>
+					<OverflowToolbar design="Transparent">
+						<ToolbarSpacer/>
+						<Button text="{i18n>CreateRequest}" icon="sap-icon://request" press="onPressRequest" type="Accept"/>
+					</OverflowToolbar>
+				</smartTable:customToolbar>
+				<Table id="tblRequestList" sticky="ColumnHeaders">
+					<columns>
+						<Column >
+							<customData>
+								<core:CustomData key="p13nData" value='\{"columnKey": "Reqnr", "columnIndex":"0", "sortProperty":"Reqnr", "leadingProperty": "Reqnr" }'/>
+							</customData>
+							<Text text="{i18n>RequestNumber}" wrapping="true"/>
+						</Column>
+						<Column >
+							<customData>
+								<core:CustomData key="p13nData"
+									value='\{"columnKey": "ReqtypTxt", "columnIndex":"1", "sortProperty":"ReqtypTxt", "leadingProperty": "Reqtyp,ReqtypTxt" }'/>
+							</customData>
+							<Text text="{i18n>RequestType}" wrapping="true"/>
+						</Column>
+						<Column >
+							<customData>
+								<core:CustomData key="p13nData"
+									value='\{"columnKey": "ReqstatTxt", "columnIndex":"2", "sortProperty":"ReqstatTxt", "leadingProperty": "Reqstat,ReqstatTxt" }'/>
+							</customData>
+							<Text text="{i18n>RequestStatus}" wrapping="true"/>
+						</Column>
+						<Column minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+							<customData>
+								<core:CustomData key="p13nData"
+									value='\{"columnKey": "Mtart", "columnIndex":"3", "sortProperty":"Mtart", "leadingProperty": "Mtart,Mtbez" }'/>
+							</customData>
+							<Text text="{i18n>MaterialType}" wrapping="true"/>
+						</Column>
+						<!-- <Column minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+							<customData>
+								<core:CustomData key="p13nData" value='\{"columnKey": "Gmpmat", "columnIndex":"4", "sortProperty":"Gmpmat", "leadingProperty": "Gmpmat" }'/>
+							</customData>
+							<Text text="{i18n>GMPorNonGMP}" wrapping="true"/>
+						</Column> -->
+						<Column minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+							<customData>
+								<core:CustomData key="p13nData" value='\{"columnKey": "Matnr", "columnIndex":"6", "sortProperty":"Matnr", "leadingProperty": "Matnr" }'/>
+							</customData>
+							<Text text="{i18n>MaterialNumber}" wrapping="true"/>
+						</Column>
+						<Column minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+							<customData>
+								<core:CustomData key="p13nData" value='\{"columnKey": "Maktx", "columnIndex":"7", "sortProperty":"Maktx", "leadingProperty": "Maktx" }'/>
+							</customData>
+							<Text text="{i18n>MaterialDescription}" wrapping="true"/>
+						</Column>
+						<Column minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+							<customData>
+								<core:CustomData key="p13nData"
+									value='\{"columnKey": "Werks", "columnIndex":"8", "sortProperty":"Werks", "leadingProperty": "Werks,Name1" }'/>
+							</customData>
+							<Text text="{i18n>Plant}" wrapping="true"/>
+						</Column>
+						<!-- <Column minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+							<customData>
+								<core:CustomData key="p13nData" value='\{"columnKey": "Aennr", "columnIndex":"9", "sortProperty":"Aennr", "leadingProperty": "Aennr" }'/>
+							</customData>
+							<Text text="{i18n>ChangeNumberCreated}" wrapping="true"/>
+						</Column> -->
+						<Column minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+							<customData>
+								<core:CustomData key="p13nData"
+									value='\{"columnKey": "Crtuser", "columnIndex":"10", "sortProperty":"Crtuser", "leadingProperty": "Crtuser" }'/>
+							</customData>
+							<Text text="{i18n>CreatedBy}" wrapping="true"/>
+						</Column>
+						<Column minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+							<customData>
+								<core:CustomData key="p13nData"
+									value='\{"columnKey": "Crtdate", "columnIndex":"11", "sortProperty":"Crtdate", "leadingProperty": "Crtdate" }'/>
+							</customData>
+							<Text text="{i18n>CreatedOn}" wrapping="true"/>
+						</Column>
+						<Column minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+							<customData>
+								<core:CustomData key="p13nData"
+									value='\{"columnKey": "Crttime", "columnIndex":"12", "sortProperty":"Crttime", "leadingProperty": "Crttime" }'/>
+							</customData>
+							<Text text="{i18n>CreatedAt}" wrapping="true"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem type="Navigation" press="onPressDetail">
+							<cells>
+								<ObjectNumber number="{Reqnr}"/>
+								<Text text="{ReqtypTxt}"/>
+								<ObjectNumber number="{ReqstatTxt}" state="{ parts: [ { path:'Reqstat' } ], formatter:'.formatter.reqStatStateFormat' }"/>
+								<Text text="{Mtart} - {Mtbez}"/>
+								<!-- <Text text="{ parts: [ { path:'Gmpmat' } ], formatter:'.formatter.gmpTextFormat' }"/> -->
+								<Text text="{Matnr}"/>
+								<Text text="{Maktx}"/>
+								<Text text="{Werks} - {Name1}"/>
+								<!-- <CheckBox selected="{ parts: [ { path:'Aennr' } ], formatter:'.formatter.changeNumberExistFormat' }" enabled="false"/> -->
+								<Text text="{Crtuser}"/>
+								<Text text="{ path: 'Crtdate', type: 'sap.ui.model.odata.type.Date', formatOptions: { pattern : 'dd.MM.yyyy' } }"/>
+								<Text text="{ path: 'Crttime', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern : 'HH:mm:ss' } }"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</smartTable:SmartTable>
+		</content>
+	</Page>
+</mvc:View>

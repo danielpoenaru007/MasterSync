@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<Dialog title="{i18>MaterialList}" contentWidth="900px">
+		<content>
+			<Table id="tblMatnrF4" items="{viewModel>/MaterailGMPData}" mode="SingleSelectLeft">
+				<headerToolbar>
+					<OverflowToolbar>
+						<SearchField id="srcMatnr" search="onSearchMatnrF4">
+							<layoutData>
+								<OverflowToolbarLayoutData maxWidth="500px" shrinkable="true" priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+						<ToolbarSpacer/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column hAlign="Left">
+						<Text text="{i18n>MaterialNumber}" wrapping="true"/>
+					</Column>
+					<Column hAlign="Left">
+						<Text text="{i18n>MaterialDescription}" wrapping="true"/>
+					</Column>
+					<Column  hAlign="Left">
+						<Text text="{i18n>XPlantStatus}" wrapping="true"/>
+					</Column>
+					<Column id="clmnPlant" hAlign="Left">
+						<Text text="{i18n>Plant}" wrapping="true"/>
+					</Column>
+					<Column id="clmnPSmatlStatus" hAlign="Left">
+						<Text text="{i18n>PSmatlStatus}" wrapping="true"/>
+					</Column>
+					<Column hAlign="Left">
+						<Text text="{i18n>MaterialType}" wrapping="true"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem >
+						<cells>
+							<Text text="{viewModel>Matnr}"/>
+							<Text text="{viewModel>Maktx}"/>
+							<Text text="{viewModel>Mstae} - {viewModel>MstaeTxt}"/>
+							<Text text="{viewModel>Werks}"/>
+							<Text text="{viewModel>Mmsta} - {viewModel>MmstaTxt}"/>
+							<Text text="{viewModel>Mtart} - {viewModel>Mtbez}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<beginButton>
+			<Button text="{i18n>Cancel}" icon="sap-icon://sys-cancel" type="Reject" press="onPressMaterialListCancel"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>Select}" icon="sap-icon://accept" type="Accept" press="onPressMaterialListOK"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

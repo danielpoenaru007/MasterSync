@@ -1,0 +1,427 @@
+<mvc:View controllerName="zmmatreq.controller.RequestDetail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.uxap">
+	<u:ObjectPageLayout id="ObjectPageLayout" showFooter="true">
+		<u:headerTitle>
+			<u:ObjectPageHeader objectTitle="{viewModel>/worklistTableTitle}"/>
+		</u:headerTitle>
+		<u:sections>
+			<u:ObjectPageSection title="{i18n>RequestInformation}" showTitle="true">
+				<u:subSections>
+					<u:ObjectPageSubSection >
+						<u:blocks>
+							<f:Form>
+								<f:layout>
+									<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="2" labelSpanS="6" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+										emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false"/>
+								</f:layout>
+								<f:formContainers>
+									<f:FormContainer >
+										<f:formElements>
+											<f:FormElement label="{i18n>RequestNumber}">
+												<f:fields>
+													<Input id="inpReqnr" value="{viewModel>/HeaderData/Reqnr}" enabled="false" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>RequestType}">
+												<f:fields>
+													<Select id="cbReqtyp" change="onChangeRequestType" selectedKey="{viewModel>/HeaderData/Reqtyp}" enabled="{viewModel>/enabledReqty}"
+														width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>RequestStatus}" visible="{viewModel>/visibleReqstat}">
+												<f:fields>
+													<ComboBox id="cbReqstat" enabled="false" selectedKey="{viewModel>/HeaderData/Reqstat}" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>Plant}" visible="{viewModel>/visibleReqType/Werks}">
+												<f:fields>
+													<ComboBox id="cbWerks" filterSecondaryValues="true" showSecondaryValues="true" selectedKey="{viewModel>/HeaderData/Werks}"
+														enabled="{viewModel>/enabledWerks}" width="80%" change="onChangeWerks"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>StorageLoc}" visible="{viewModel>/visibleReqType/Lgort}">
+												<f:fields>
+													<MultiComboBox id="mcbLgort" selectedKeys="{viewModel>/HeaderData/StorageLoc}" enabled="{viewModel>/enabledLgort}" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>MaterialNumber}">
+												<f:fields>
+													<Input id="inpMatnr" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="onPressMatnrF4" value="{viewModel>/HeaderData/Matnr}"
+														enabled="{viewModel>/enabledMatnr}" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>MaterialDescription}">
+												<f:fields>
+													<TextArea id="txtAreaMaktx" rows="2" maxLength="40" value="{viewModel>/HeaderData/Maktx}" enabled="{viewModel>/enabledMaktx}" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>PlantSpecificMat}" visible="{viewModel>/visibleReqType/MstaeWerks}">
+												<f:fields>
+													<ComboBox id="cbMstaeWerks" filterSecondaryValues="true" showSecondaryValues="true" selectedKey="{viewModel>/HeaderData/MstaeWerks}"
+														enabled="false" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>MaterialType}" visible="{viewModel>/visibleReqType/Mtart}">
+												<f:fields>
+													<ComboBox id="cbMtart" filterSecondaryValues="true" showSecondaryValues="true" selectedKey="{viewModel>/HeaderData/Mtart}"
+														enabled="{viewModel>/enabledMtart}" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>PlantForExtension}" visible="{viewModel>/visibleReqType/WerksExt}">
+												<f:fields>
+													<ComboBox id="cbWerksExt" filterSecondaryValues="true" showSecondaryValues="true" selectedKey="{viewModel>/HeaderData/WerksExt}"
+														enabled="{viewModel>/enabledWerksExt}" width="80%" change="onChangeWerksExt"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>StorageLocForExtension}" visible="{viewModel>/visibleReqType/LgortExt}">
+												<f:fields>
+													<MultiComboBox id="mcbLgortExt" enabled="{viewModel>/enabledLgortExt}" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>SalesOrgForExtension}" visible="{viewModel>/visibleReqType/VkorgExt}">
+												<f:fields>
+													<ComboBox id="cbVkorgExt" filterSecondaryValues="true" showSecondaryValues="true" selectedKey="{viewModel>/HeaderData/VkorgExt}"
+														enabled="{viewModel>/enabledVkorgExt}" width="80%" change="onChangeVkorgExt"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>DistChnForExtension}" visible="{viewModel>/visibleReqType/VtwegExt}">
+												<f:fields>
+													<ComboBox id="cbVtwegExt" filterSecondaryValues="true" showSecondaryValues="true" selectedKey="{viewModel>/HeaderData/VtwegExt}"
+														enabled="{viewModel>/enabledVtwegExt}" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>PlantForChange}" visible="{viewModel>/visibleReqType/WerksChn}">
+												<f:fields>
+													<ComboBox id="cbWerksChn" filterSecondaryValues="true" showSecondaryValues="true" selectedKey="{viewModel>/HeaderData/WerksChn}"
+														enabled="{viewModel>/enabledWerksChn}" width="80%" change="onChangeWerksChn"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>StorageLocForChange}" visible="{viewModel>/visibleReqType/LgortChn}">
+												<f:fields>
+													<MultiComboBox id="mcbLgortChn" enabled="{viewModel>/enabledLgortChn}" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>SalesOrgForChange}" visible="{viewModel>/visibleReqType/VkorgChn}">
+												<f:fields>
+													<ComboBox id="cbVkorgChn" filterSecondaryValues="true" showSecondaryValues="true" selectedKey="{viewModel>/HeaderData/VkorgChn}"
+														enabled="{viewModel>/enabledVkorgChn}" width="80%" change="onChangeVkorgChn"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>DistChnForChange}" visible="{viewModel>/visibleReqType/VtwegChn}">
+												<f:fields>
+													<ComboBox id="cbVtwegChn" filterSecondaryValues="true" showSecondaryValues="true" selectedKey="{viewModel>/HeaderData/VtwegChn}"
+														enabled="{viewModel>/enabledVtwegChn}" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>UnitOfMeasure}" visible="{viewModel>/visibleReqType/Meins}">
+												<f:fields>
+													<ComboBox id="cbMeins" filterSecondaryValues="true" showSecondaryValues="true" selectedKey="{viewModel>/HeaderData/Meins}"
+														enabled="{viewModel>/enabledHeaderData}" width="80%" selectionChange="onSelectionChangeUom"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>MaterialGroup}" visible="{viewModel>/visibleReqType/Matkl}">
+												<f:fields>
+													<ComboBox id="cbMatkl" filterSecondaryValues="true" showSecondaryValues="true" selectedKey="{viewModel>/HeaderData/Matkl}"
+														enabled="{viewModel>/enabledHeaderData}" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>RequestNote}" visible="{viewModel>/visibleReqType/RequestNote}">
+												<f:fields>
+													<TextArea id="txtAreaRequestNote" rows="3" maxLength="255" value="{viewModel>/HeaderData/Reqnote}" enabled="{viewModel>/enabledHeaderData}"
+														width="80%"/>
+												</f:fields>
+											</f:FormElement>
+										</f:formElements>
+									</f:FormContainer>
+									<f:FormContainer >
+										<f:formElements>
+											<!-- <f:FormElement label="{i18n>HazardousGoods}" visible="{viewModel>/visibleReqType/Hazgd}">
+												<f:fields>
+													<Switch id="swcHazgd" type="AcceptReject" state="{viewModel>/HeaderData/Hazgd}" enabled="{viewModel>/enabledHeaderData}">
+														<layoutData>
+															<FlexItemData growFactor="1"/>
+														</layoutData>
+													</Switch>
+												</f:fields>
+											</f:FormElement> -->
+											<f:FormElement label="{i18n>SupplierMatNumber}" visible="{viewModel>/visibleReqType/Idnlf}">
+												<f:fields>
+													<Input id="inpIdnlf" value="{viewModel>/HeaderData/Idnlf}" maxLength="35" enabled="{viewModel>/enabledHeaderData}" width="80%"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>Manufacturer}" visible="{viewModel>/visibleReqType/Mfrnr}">
+												<f:fields>
+													<Input id="inpMfrnr" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{viewModel>/SupplierData}"
+														enabled="{viewModel>/enabledHeaderData}" value="{viewModel>/HeaderData/Mfrnr}" width="80%">
+														<suggestionColumns>
+															<Column hAlign="Left">
+																<Text text="{i18n>Supplier}" wrapping="true"/>
+															</Column>
+															<Column hAlign="Center" width="4rem">
+																<Text text="{i18n>Country}" wrapping="true"/>
+															</Column>
+															<Column hAlign="Center">
+																<Text text="{i18n>Name}" wrapping="true"/>
+															</Column>
+															<Column hAlign="Center">
+																<Text text="{i18n>City}" wrapping="true"/>
+															</Column>
+															<Column hAlign="Center">
+																<Text text="{i18n>PostalCode}" wrapping="true"/>
+															</Column>
+														</suggestionColumns>
+														<suggestionRows>
+															<ColumnListItem>
+																<Text text="{viewModel>Lifnr}"/>
+																<Text text="{viewModel>Land1}"/>
+																<Text text="{viewModel>Mcod1}"/>
+																<Text text="{viewModel>Mcod3}"/>
+																<Text text="{viewModel>Pstlz}"/>
+															</ColumnListItem>
+														</suggestionRows>
+													</Input>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>Supplier}" visible="{viewModel>/visibleReqType/Lifnr}">
+												<f:fields>
+													<Input id="inpLifnr" showSuggestion="true" showTableSuggestionValueHelp="false" suggestionRows="{viewModel>/SupplierData}"
+														enabled="{viewModel>/enabledHeaderData}" width="80%" value="{viewModel>/HeaderData/Lifnr}">
+														<suggestionColumns>
+															<Column hAlign="Left">
+																<Text text="{i18n>Supplier}" wrapping="true"/>
+															</Column>
+															<Column hAlign="Center" width="4rem">
+																<Text text="{i18n>Country}" wrapping="true"/>
+															</Column>
+															<Column hAlign="Center">
+																<Text text="{i18n>Name}" wrapping="true"/>
+															</Column>
+															<Column hAlign="Center">
+																<Text text="{i18n>City}" wrapping="true"/>
+															</Column>
+															<Column hAlign="Center">
+																<Text text="{i18n>PostalCode}" wrapping="true"/>
+															</Column>
+														</suggestionColumns>
+														<suggestionRows>
+															<ColumnListItem>
+																<Text text="{viewModel>Lifnr}"/>
+																<Text text="{viewModel>Land1}"/>
+																<Text text="{viewModel>Mcod1}"/>
+																<Text text="{viewModel>Mcod3}"/>
+																<Text text="{viewModel>Pstlz}"/>
+															</ColumnListItem>
+														</suggestionRows>
+													</Input>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement visible="{viewModel>/visibleReqType/AltUom}">
+												<Table items="{viewModel>/AltUomData}">
+													<headerToolbar>
+														<OverflowToolbar>
+															<Title text="{i18n>AltUnitOfMeasure}" level="H2"/>
+															<ToolbarSpacer/>
+															<Button icon="sap-icon://add" press="onPressAddNewAltUom" enabled="{viewModel>/BasicTextData/enabledAddBtn}"/>
+														</OverflowToolbar>
+													</headerToolbar>
+													<columns>
+														<Column hAlign="Left">
+															<Text text="{i18n>Denominator}"/>
+														</Column>
+														<Column hAlign="Center">
+															<Text text="{i18n>AltUnitOfMeasure}"/>
+														</Column>
+														<Column hAlign="Center">
+															<Text text="{i18n>Numerator}"/>
+														</Column>
+														<Column hAlign="Center">
+															<Label text="{i18n>BaseUnitOfMeasure}"/>
+														</Column>
+														<Column hAlign="Right" width="4rem">
+															<Label text=""/>
+														</Column>
+													</columns>
+													<items>
+														<ColumnListItem>
+															<cells>
+																<Text text="{viewModel>Umren}"/>
+																<Text text="{viewModel>Meinh}"/>
+																<Text text="{viewModel>Umrez}"/>
+																<Text text="{viewModel>Meins}"/>
+																<core:Icon src="sap-icon://delete" color="red" size="20px" press="onPressDeleteAltUom" visible="{viewModel>Deletable}"/>
+															</cells>
+														</ColumnListItem>
+													</items>
+												</Table>
+											</f:FormElement>
+											<f:FormElement visible="{viewModel>/visibleReqType/BasicText}">
+												<Table items="{viewModel>/BasicTextData}">
+													<headerToolbar>
+														<OverflowToolbar>
+															<Title text="{i18n>BasicDataText}" level="H2"/>
+															<ToolbarSpacer/>
+															<Button icon="sap-icon://add" press="onPressAddNewBasicText" enabled="{viewModel>/BasicTextData/enabledAddBtn}"/>
+														</OverflowToolbar>
+													</headerToolbar>
+													<columns>
+														<Column hAlign="Left" width="25%">
+															<Text text="{i18n>Language}"/>
+														</Column>
+														<Column hAlign="Left" width="80%">
+															<Text text="{i18n>BasicDataText}"/>
+														</Column>
+														<Column hAlign="Right" width="4rem"></Column>
+													</columns>
+													<items>
+														<ColumnListItem>
+															<cells>
+																<Text text="{viewModel>Spras}"/>
+																<Text text="{viewModel>BasicText}"/>
+																<core:Icon src="sap-icon://delete" color="red" size="20px" press="onPressDeleteBasicText" visible="{viewModel>Deletable}"/>
+															</cells>
+														</ColumnListItem>
+													</items>
+												</Table>
+											</f:FormElement>
+											<f:FormElement visible="{viewModel>/visibleReqType/StreamText}">
+												<Table items="{viewModel>/StreamChangeData}">
+													<headerToolbar>
+														<OverflowToolbar>
+															<Title text="{i18n>ChangesText}" level="H2"/>
+															<ToolbarSpacer/>
+															<Button icon="sap-icon://add" press="onPressAddNewStreamText" enabled="{viewModel>/StreamChangeData/enabledAddBtn}"/>
+														</OverflowToolbar>
+													</headerToolbar>
+													<columns>
+														<Column hAlign="Left" width="25%">
+															<Text text="{i18n>Stream}"/>
+														</Column>
+														<Column hAlign="Left" width="80%">
+															<Text text="{i18n>ChangeText}"/>
+														</Column>
+														<Column hAlign="Right" width="4rem"></Column>
+													</columns>
+													<items>
+														<ColumnListItem>
+															<cells>
+																<Text text="{viewModel>Stream}"/>
+																<Text text="{viewModel>ChangeText}"/>
+																<core:Icon src="sap-icon://delete" color="red" size="20px" press="onPressDeleteStreamText" visible="{viewModel>Deletable}"/>
+															</cells>
+														</ColumnListItem>
+													</items>
+												</Table>
+											</f:FormElement>
+										</f:formElements>
+									</f:FormContainer>
+								</f:formContainers>
+							</f:Form>
+						</u:blocks>
+					</u:ObjectPageSubSection>
+				</u:subSections>
+			</u:ObjectPageSection>
+			<u:ObjectPageSection title="{i18n>Attachment}" showTitle="true">
+				<u:subSections>
+					<u:ObjectPageSubSection >
+						<u:blocks>
+							<VBox>
+								<UploadCollection id="uploadCollection" maximumFilenameLength="50" maximumFileSize="2" multiple="false" showSeparators="All"
+									change="onChangeFile" beforeUploadStarts="onBeforeUploadStartsFile" uploadComplete="onUploadCompleteFile" fileDeleted="onFileDeleted"
+									fileType="jpg,jpeg,png,bmp,docx,doc,ppt,pptx,pdf,xls,xlsx,txt" noDataText="{i18n>NoFilesFound}" items="{viewModel>/DocListData}"
+									uploadEnabled="{viewModel>/enabledUpload}">
+									<items>
+										<UploadCollectionItem fileName="{viewModel>Filename}" mimeType="{viewModel>Mimetype}"
+											url="{ parts: [ { path:'viewModel>Docguid' }, { path:'viewModel>Line' } ], formatter:'.formatter.fileURL' }" visibleEdit="false"
+											visibleDelete="{ parts: [ { path:'viewModel>Deletable' } ], formatter:'.formatter.deletableFormatted' }">
+											<statuses>
+												<ObjectStatus title="{i18n>Size}" text="{ parts: [ { path:'viewModel>Length' } ], formatter:'.formatter.fileSizeFormatted' }"/>
+											</statuses>
+										</UploadCollectionItem>
+									</items>
+								</UploadCollection>
+							</VBox>
+						</u:blocks>
+					</u:ObjectPageSubSection>
+				</u:subSections>
+			</u:ObjectPageSection>
+			<u:ObjectPageSection title="{i18n>Status}" showTitle="true" visible="{viewModel>/visibleStatusTab}">
+				<u:subSections>
+					<u:ObjectPageSubSection >
+						<u:blocks>
+							<Table id="tblReqStat" items="{viewModel>/StatusData}">
+								<headerToolbar>
+									<OverflowToolbar>
+										<ToolbarSpacer/>
+										<Button icon="sap-icon://refresh" press="onPressStatusRefresh"/>
+									</OverflowToolbar>
+								</headerToolbar>
+								<columns>
+									<Column hAlign="Left" width="10rem" minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+										<Text text="{i18n>Workflow}" wrapping="true"/>
+									</Column>
+									<Column hAlign="Left" width="30rem">
+										<Text text="{i18n>WorkItemDesc}" wrapping="true"/>
+									</Column>
+									<Column hAlign="Left" width="7rem" minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+										<Text text="{i18n>WorkItemStatus}" wrapping="true"/>
+									</Column>
+									<Column hAlign="Left" width="9rem" minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+										<Text text="{i18n>Username}" wrapping="true"/>
+									</Column>
+									<Column hAlign="Left" width="12rem" minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+										<Text text="{i18n>Approval}" wrapping="true"/>
+									</Column>
+									<Column hAlign="Left" width="11rem" minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+										<Text text="{i18n>CreatedDate}" wrapping="true"/>
+									</Column>
+									<Column hAlign="Left" width="11rem" minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+										<Text text="{i18n>CompletedDate}" wrapping="true"/>
+									</Column>
+									<Column hAlign="Left" minScreenWidth="Small" demandPopin="true" popinDisplay="Inline">
+										<Text text="{i18n>DecisionNote}" wrapping="true"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem >
+										<cells>
+											<ObjectIdentifier title="{ parts: [ { path:'viewModel>Main' }, { path:'viewModel>ReqType' } ], formatter:'.formatter.mainTitleFormat' }"
+												text="{ parts: [ { path:'viewModel>Main' }, { path:'viewModel>ReqType' } ], formatter:'.formatter.mainTextFormat' }"/>
+											<ObjectIdentifier title="{ parts: [ { path:'viewModel>Main' }, { path:'viewModel>WiText' } ], formatter:'.formatter.mainTitleFormat' }"
+												text="{ parts: [ { path:'viewModel>Main' }, { path:'viewModel>WiText' } ], formatter:'.formatter.mainTextFormat' }"/>
+											<ObjectStatus text="{viewModel>WiStatTxt}" state="{ parts: [ { path:'viewModel>WiStat' } ], formatter:'.formatter.colorWIStatFormat' }"
+												inverted="true"/>
+											<Text text="{viewModel>MdfUser}"/>
+											<ObjectStatus class="sapUiSmallMarginBottom" text="{viewModel>ResultTxt}"
+												icon="{ parts: [ { path:'viewModel>ResultStat' } ], formatter:'.formatter.iconResultFormat' }"
+												state="{ parts: [ { path:'viewModel>ResultStat' } ], formatter:'.formatter.colorResultFormat' }"/>
+											<Text text="{viewModel>WiCredate} {viewModel>WiCretime}"/>
+											<Text text="{viewModel>WiCompdate} {viewModel>WiComptime}"/>
+											<Text text="{viewModel>DecisionNote}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</u:blocks>
+					</u:ObjectPageSubSection>
+				</u:subSections>
+			</u:ObjectPageSection>
+		</u:sections>
+		<u:footer>
+			<OverflowToolbar >
+				<ToolbarSpacer/>
+				<Button text="{i18n>CreateRequest}" icon="sap-icon://request" press="onPressCreateRequest" type="Accept"
+					visible="{viewModel>/visibleFooterButton/Create}"/>
+				<Button text="{i18n>CancelRequest}" icon="sap-icon://decline" press="onPressCancelRequest" type="Reject"
+					visible="{viewModel>/visibleFooterButton/Cancel}"/>
+				<Button text="{i18n>ChangeRequest}" icon="sap-icon://edit" press="onPressChangeRequest" type="Emphasized"
+					visible="{viewModel>/visibleFooterButton/Change}"/>
+				<Button text="{i18n>SubmitRequest}" icon="sap-icon://hr-approval" press="onPressSubmitRequest" type="Accept"
+					visible="{viewModel>/visibleFooterButton/Submit}"/>
+				<Button text="{i18n>Cancel}" icon="sap-icon://sys-cancel" press="onPressCancelChanges" type="Reject"
+					visible="{viewModel>/visibleFooterButton/CancelSave}"/>
+				<Button text="{i18n>SaveRequest}" icon="sap-icon://save" press="onPressSaveRequest" type="Accept"
+					visible="{viewModel>/visibleFooterButton/Save}"/>
+			</OverflowToolbar>
+		</u:footer>
+	</u:ObjectPageLayout>
+</mvc:View>
